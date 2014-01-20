@@ -44,7 +44,10 @@ function install_cmdeals() {
 	
 	// Do install
 	cmdeals_default_options();
-	cmdeals_tables_install();
+
+	if (get_option('cmdeals_db_version') != CMDEALS_VERSION)
+		cmdeals_tables_install();
+
 	cmdeals_default_taxonomies();
 	cmdeals_populate_custom_fields();
         cmdeals_upgrade();
@@ -72,7 +75,7 @@ function install_cmdeals() {
 	if ( $cmdeals instanceof cmdeals ) $cmdeals->clear_deals_transients();
 	
 	// Update version
-	update_option( "deals_db_version", WPDEALS_VERSION );
+	update_option( "cmdeals_db_version", CMDEALS_VERSION );
 }
 
 /**
@@ -237,7 +240,7 @@ function cmdeals_tables_install() {
 	$wpdb->hide_errors();
 
 	$collate = '';
-    if($wpdb->supports_collation()) {
+    if($wpdb->has_cap('collation')) {
 		if(!empty($wpdb->charset)) $collate = "DEFAULT CHARACTER SET $wpdb->charset";
 		if(!empty($wpdb->collate)) $collate .= " COLLATE $wpdb->collate";
     }
@@ -283,7 +286,7 @@ function cmdeals_tables_install() {
     dbDelta($sql);
     
     // Update cmdeals_permissions table to include order ID's as well as keys
-    $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".$wpdb->prefix."cmdeals_permissions WHERE order_id = 0;" ) );
+    $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".$wpdb->prefix."cmdeals_permissions WHERE order_id = %d;", 0 ) );
 	
 	if ($results) foreach ($results as $result) :
 		
@@ -375,7 +378,7 @@ function cmdeals_upgrade(){
 	$wpdb->hide_errors();
 
 	$collate = '';
-        if($wpdb->supports_collation()) {
+        if($wpdb->has_cap('collation')) {
                     if(!empty($wpdb->charset)) $collate = "DEFAULT CHARACTER SET $wpdb->charset";
                     if(!empty($wpdb->collate)) $collate .= " COLLATE $wpdb->collate";
         }
@@ -383,7 +386,7 @@ function cmdeals_upgrade(){
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     
         // Update cmdeals_permissions table to include order ID's as well as keys
-        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".$wpdb->prefix."postmeta WHERE meta_key = '_end_time';" ) );
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".$wpdb->prefix."postmeta WHERE meta_key = '%s';", '_end_time' ) );
 	
 	if ($results) foreach ($results as $result) :
 		

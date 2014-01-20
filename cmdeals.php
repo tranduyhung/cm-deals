@@ -30,6 +30,7 @@ Author URI: http://www.cmext.vn/
 License: GPLv2 or later
 Requires at least: 3.1
 Tested up to: 3.8
+Stable tag: 1.0.0
 */
 
 if (!session_id()) session_start();
@@ -37,8 +38,8 @@ if (!session_id()) session_start();
 /**
  * Constants
  **/ 
-define("WPDEALS_VERSION", "2.0.1.1");
-if (!defined('WPDEALS_TEMPLATE_URL')) define('WPDEALS_TEMPLATE_URL', 'cmdeals/');	
+define("CMDEALS_VERSION", "1.0.0");
+if (!defined('CMDEALS_TEMPLATE_URL')) define('CMDEALS_TEMPLATE_URL', 'cmdeals/');	
 
 /**
  * Localisation
@@ -55,7 +56,7 @@ if ( is_admin() ) :
 
 	register_activation_hook( __FILE__, 'activate_cmdeals' );
 	
-	if (get_option('deals_db_version') != WPDEALS_VERSION) : add_action('init', 'install_cmdeals', 0); endif;
+	if (get_option('cmdeals_db_version') != CMDEALS_VERSION) : add_action('init', 'install_cmdeals', 0); endif;
 
 endif;
 
@@ -137,7 +138,7 @@ function cmdeals_init() {
         if (!is_admin()) :
 
             // Optional front end css	
-            if ((defined('WPDEALS_USE_CSS') && WPDEALS_USE_CSS) || (!defined('WPDEALS_USE_CSS') && get_option('cmdeals_frontend_css') == 'yes')) :
+            if ((defined('CMDEALS_USE_CSS') && CMDEALS_USE_CSS) || (!defined('CMDEALS_USE_CSS') && get_option('cmdeals_frontend_css') == 'yes')) :
                     $css = file_exists(get_stylesheet_directory() . '/cmdeals/style.css') ? get_stylesheet_directory_uri() . '/cmdeals/style.css' : $cmdeals->plugin_url() . '/cmdeals-assets/css/cmdeals.css';
                     wp_register_style('cmdeals_frontend_styles', $css );
                     wp_enqueue_style( 'cmdeals_frontend_styles' );
@@ -170,7 +171,7 @@ function cmdeals_init_post_thumbnails() {
 add_action('wp_head', 'cmdeals_generator');
 
 function cmdeals_generator() {
-	echo "\n\n" . '<!-- CMDeals Version -->' . "\n" . '<meta name="generator" content="CMDeals ' . WPDEALS_VERSION . '" />' . "\n\n";
+	echo "\n\n" . '<!-- CMDeals Version -->' . "\n" . '<meta name="generator" content="CMDeals ' . CMDEALS_VERSION . '" />' . "\n\n";
 }
 
 /**
@@ -764,7 +765,7 @@ function cmdeals_check_deals() {
         
         // Update cmdeals_permissions table to include order ID's as well as keys
 	$datenow    = current_time('timestamp');
-        $results    = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key = '_end_time' AND meta_value < $datenow;" ) );
+        $results    = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM ".$wpdb->prefix."postmeta WHERE meta_key = '%s' AND meta_value < %s;", '_end_time', $datenow ) );
         
         foreach ($results as $key => $value) 
                 update_post_meta($value->post_id, '_is_expired', 'yes');
