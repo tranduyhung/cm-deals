@@ -275,20 +275,20 @@ function cmdeals_frontend_scripts() {
 	endif;
     	
 	/* Script variables */
-	$states = json_encode( $cmdeals->countries->states );
-	
+	$countries = json_encode( $cmdeals->countries );
+
 	$cmdeals_params = array(
-		'countries' 				=> $states,
-		'select_state_text' 			=> __('Select a state&hellip;', 'cmdeals'),
-		'state_text' 				=> __('state', 'cmdeals'),
-		'plugin_url' 				=> $cmdeals->plugin_url(),
-		'ajax_url' 				=> (!is_ssl()) ? str_replace('https', 'http', admin_url('admin-ajax.php')) : admin_url('admin-ajax.php'),
-		'get_variation_nonce' 			=> wp_create_nonce("get-variation"),
-		'add_to_cart_nonce' 			=> wp_create_nonce("buy-this"),
-		'update_order_review_nonce'             => wp_create_nonce("update-order-review"),
-		'option_guest_checkout'			=> get_option('cmdeals_enable_guest_checkout'),
+		'countries'					=> $countries,
+		'select_state_text'			=> __('Select a state&hellip;', 'cmdeals'),
+		'state_text'				=> __('state', 'cmdeals'),
+		'plugin_url'				=> $cmdeals->plugin_url(),
+		'ajax_url'					=> (!is_ssl()) ? str_replace('https', 'http', admin_url('admin-ajax.php')) : admin_url('admin-ajax.php'),
+		'get_variation_nonce'		=> wp_create_nonce("get-variation"),
+		'add_to_cart_nonce'			=> wp_create_nonce("buy-this"),
+		'update_order_review_nonce'	=> wp_create_nonce("update-order-review"),
+		'option_guest_checkout'		=> get_option('cmdeals_enable_guest_checkout'),
 		'checkout_url'				=> admin_url('admin-ajax.php?action=cmdeals-checkout'),
-		'option_ajax_add_to_cart'		=> get_option('cmdeals_enable_ajax_add_to_cart')
+		'option_ajax_add_to_cart'	=> get_option('cmdeals_enable_ajax_add_to_cart')
 	);
 	
 	$cmdeals_params['is_checkout'] = ( is_page(get_option('cmdeals_checkout_page_id')) ) ? 1 : 0;
