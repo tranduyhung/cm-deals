@@ -108,25 +108,25 @@ function cmdeals_admin_scripts() {
 		wp_enqueue_script( 'thickbox' );
 		wp_enqueue_script('chosen');
 		
-		$cmdeals_witepanel_params = array( 
-			'remove_item_notice' 			=> __("Remove this item? If you have previously reduced this item's stock, or this order was submitted by a customer, will need to manually restore the item's stock.", 'cmdeals'),
-			'cart_total' 				=> __("Calculate totals based on order items?", 'cmdeals'),
-			'ID' 					=> __('ID', 'cmdeals'),
-			'item_name' 				=> __('Item Name', 'cmdeals'),
-			'quantity' 				=> __('Quantity e.g. 2', 'cmdeals'),
-			'cost_unit' 				=> __('Cost per unit e.g. 2.99', 'cmdeals'),
-			'select_terms'				=> __('Select terms', 'cmdeals'),
-			'no_customer_selected'			=> __('No customer selected', 'cmdeals'),
-			'plugin_url' 				=> $cmdeals->plugin_url(),
-			'ajax_url' 				=> admin_url('admin-ajax.php'),
-			'add_order_item_nonce' 			=> wp_create_nonce("add-order-item"),
-			'get_customer_details_nonce'            => wp_create_nonce("get-customer-details"),
-			'upsell_crosssell_search_deals_nonce'   => wp_create_nonce("search-daily-deals"),
-			'calendar_image'			=> $cmdeals->plugin_url().'/cmdeals-assets/images/calendar.png',
-			'post_id'				=> $post->ID
+		$cmdeals_writepanel_params = array(
+			'remove_item_notice'					=> __("Remove this item? If you have previously reduced this item's stock, or this order was submitted by a customer, will need to manually restore the item's stock.", 'cmdeals'),
+			'cart_total'							=> __("Calculate totals based on order items?", 'cmdeals'),
+			'ID'									=> __('ID', 'cmdeals'),
+			'item_name'								=> __('Item Name', 'cmdeals'),
+			'quantity'								=> __('Quantity e.g. 2', 'cmdeals'),
+			'cost_unit'								=> __('Cost per unit e.g. 2.99', 'cmdeals'),
+			'select_terms'							=> __('Select terms', 'cmdeals'),
+			'no_customer_selected'					=> __('No customer selected', 'cmdeals'),
+			'plugin_url'							=> $cmdeals->plugin_url(),
+			'ajax_url'								=> admin_url('admin-ajax.php'),
+			'add_order_item_nonce'					=> wp_create_nonce("add-order-item"),
+			'get_customer_details_nonce'			=> wp_create_nonce("get-customer-details"),
+			'upsell_crosssell_search_deals_nonce'	=> wp_create_nonce("search-daily-deals"),
+			'calendar_image'						=> $cmdeals->plugin_url().'/cmdeals-assets/images/calendar.png',
+			'post_id'								=> isset( $post->ID) ? $post->ID : 0
 		 );
 					 
-		wp_localize_script( 'cmdeals_writepanel', 'cmdeals_writepanel_params', $cmdeals_witepanel_params );
+		wp_localize_script( 'cmdeals_writepanel', 'cmdeals_writepanel_params', $cmdeals_writepanel_params );
 		
 	endif;
 	
