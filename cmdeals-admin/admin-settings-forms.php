@@ -196,15 +196,13 @@ function cmdeals_admin_fields($options) {
             	$country_setting = (string) get_option($value['id']);
             	if (strstr($country_setting, ':')) :
             		$country = current(explode(':', $country_setting));
-            		$state = end(explode(':', $country_setting));
             	else :
             		$country = $country_setting;
-            		$state = '*';
             	endif;
             	?><tr valign="top">
                     <th scope="rpw" class="titledesc"><?php echo $value['name'] ?></th>
                     <td class="forminp"><select name="<?php echo esc_attr( $value['id'] ); ?>" style="<?php echo esc_attr( $value['css'] ); ?>" data-placeholder="<?php _e('Choose a country&hellip;', 'cmdeals'); ?>" title="Country" class="chosen_select">	
-			        	<?php echo $cmdeals->countries->country_dropdown_options($country, $state); ?>          
+			        	<?php echo $cmdeals->countries->country_dropdown_options($country); ?>          
 			        </select> <span class="description"><?php echo $value['desc'] ?></span>
                		</td>
                	</tr><?php	
