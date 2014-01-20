@@ -1,0 +1,1 @@
+<?php cmdeals_get_template( 'deal_taxonomy.php' ); ?>
