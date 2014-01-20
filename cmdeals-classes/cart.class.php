@@ -732,7 +732,7 @@ class cmdeals_cart {
 				endforeach; endif;
 			
 			// Only go beyond this point if on the cart/checkout
-			if (!is_checkout() && !defined('WPDEALS_CHECKOUT') && !is_ajax()) return;
+			if (!is_checkout() && !defined('CMDEALS_CHECKOUT') && !is_ajax()) return;
 			
 			// VAT exemption done at this point - so all totals are correct before exemption
 			if ($cmdeals->customer->is_vat_exempt()) :

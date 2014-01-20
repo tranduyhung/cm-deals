@@ -116,7 +116,7 @@ function cmdeals_checkout( $atts ) {
 	</div>
 	<?php	
 	
-	if (!defined('WPDEALS_CHECKOUT')) define('WPDEALS_CHECKOUT', true);
+	if (!defined('CMDEALS_CHECKOUT')) define('CMDEALS_CHECKOUT', true);
 	
 	if (sizeof($cmdeals->cart->get_cart())==0) :
 		wp_redirect(get_permalink(get_option('cmdeals_checkout_page_id')));

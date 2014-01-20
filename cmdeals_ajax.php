@@ -39,7 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		check_ajax_referer( 'update-order-review', 'security' );
 		
-		if (!defined('WPDEALS_CHECKOUT')) define('WPDEALS_CHECKOUT', true);
+		if (!defined('CMDEALS_CHECKOUT')) define('CMDEALS_CHECKOUT', true);
 		
 		if (sizeof($cmdeals->cart->get_cart())==0) :
 			echo '<p class="error">'.__('Sorry, your session has expired.', 'cmdeals').' <a href="'.home_url().'">'.__('Return to homepage &rarr;', 'cmdeals').'</a></p>';

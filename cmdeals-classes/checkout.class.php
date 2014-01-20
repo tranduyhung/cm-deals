@@ -155,7 +155,7 @@ class cmdeals_checkout {
 		global $wpdb, $cmdeals;
 		$validation = $cmdeals->validation();
 		
-		if (!defined('WPDEALS_CHECKOUT')) define('WPDEALS_CHECKOUT', true);
+		if (!defined('CMDEALS_CHECKOUT')) define('CMDEALS_CHECKOUT', true);
 
 		do_action('cmdeals_before_checkout_process');
 		

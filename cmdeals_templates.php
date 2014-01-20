@@ -5,7 +5,7 @@
  * Handles template usage so that we can use our own templates instead of the theme's.
  *
  * Templates are in the 'templates' folder. cmdeals looks for theme 
- * overides in /theme/cmdeals/ by default  but this can be overwritten with WPDEALS_TEMPLATE_URL
+ * overides in /theme/cmdeals/ by default  but this can be overwritten with CMDEALS_TEMPLATE_URL
  *
  * @package WordPress
  * @subpackage CM Deals
@@ -32,33 +32,33 @@ function cmdeals_template_loader( $template ) {
 	
 	if ( is_single() && get_post_type() == 'daily-deals' ) {
 		
-		$template = locate_template( array( 'single-daily-deals.php', WPDEALS_TEMPLATE_URL . 'single-daily-deals.php' ) );
+		$template = locate_template( array( 'single-daily-deals.php', CMDEALS_TEMPLATE_URL . 'single-daily-deals.php' ) );
 		
 		if ( ! $template ) $template = $cmdeals->plugin_path() . '/cmdeals-templates/single-daily-deals.php';
 		
 	}
 	elseif ( is_tax('deal-categories') ) {
 		
-		$template = locate_template(  array( 'taxonomy-deal-categories.php', WPDEALS_TEMPLATE_URL . 'taxonomy-deal-categories.php' ) );
+		$template = locate_template(  array( 'taxonomy-deal-categories.php', CMDEALS_TEMPLATE_URL . 'taxonomy-deal-categories.php' ) );
 		
 		if ( ! $template ) $template = $cmdeals->plugin_path() . '/cmdeals-templates/taxonomy-deal-categories.php';
 	}
 	elseif ( is_tax('deal-tags') ) {
 		
-		$template = locate_template( array( 'taxonomy-deal-tags.php', WPDEALS_TEMPLATE_URL . 'taxonomy-deal-tags.php' ) );
+		$template = locate_template( array( 'taxonomy-deal-tags.php', CMDEALS_TEMPLATE_URL . 'taxonomy-deal-tags.php' ) );
 		
 		if ( ! $template ) $template = $cmdeals->plugin_path() . '/cmdeals-templates/taxonomy-deal-tags.php';
 	}
 	elseif ( is_post_type_archive('daily-deals') ||  is_page( get_option('cmdeals_store_page_id') )) {
 
-		$template = locate_template( array( 'archive-daily-deals.php', WPDEALS_TEMPLATE_URL . 'archive-daily-deals.php' ) );
+		$template = locate_template( array( 'archive-daily-deals.php', CMDEALS_TEMPLATE_URL . 'archive-daily-deals.php' ) );
 		
 		if ( ! $template ) $template = $cmdeals->plugin_path() . '/cmdeals-templates/archive-daily-deals.php';
 		
 	}
         elseif ( is_page( get_option('cmdeals_featured_page_id') ) ) {
 		
-		$template = locate_template( array( 'featured-store.php', WPDEALS_TEMPLATE_URL . 'featured-store.php' ) );
+		$template = locate_template( array( 'featured-store.php', CMDEALS_TEMPLATE_URL . 'featured-store.php' ) );
 		
 		if ( ! $template ) $template = $cmdeals->plugin_path() . '/cmdeals-templates/featured-store.php';
                 
@@ -76,12 +76,12 @@ add_filter( 'template_include', 'cmdeals_template_loader' );
 function cmdeals_get_template_part( $slug, $name = '' ) {
 	global $cmdeals, $post;
 	if ($name=='store') :
-		if (!locate_template(array( $slug.'-store.php', WPDEALS_TEMPLATE_URL . $slug.'-store.php' ))) :
+		if (!locate_template(array( $slug.'-store.php', CMDEALS_TEMPLATE_URL . $slug.'-store.php' ))) :
 			load_template( $cmdeals->plugin_path() . '/cmdeals-templates/'.$slug.'-store.php',false );
 			return;
 		endif;
 	endif;
-	get_template_part( WPDEALS_TEMPLATE_URL . $slug, $name );
+	get_template_part( CMDEALS_TEMPLATE_URL . $slug, $name );
 }
 
 /**
@@ -92,8 +92,8 @@ function cmdeals_comments_template($template) {
 		
 	if(get_post_type() !== 'daily-deals') return $template;
 	
-	if (file_exists( STYLESHEETPATH . '/' . WPDEALS_TEMPLATE_URL . 'single-daily-deals-reviews.php' ))
-		return STYLESHEETPATH . '/' . WPDEALS_TEMPLATE_URL . 'single-daily-deals-reviews.php'; 
+	if (file_exists( STYLESHEETPATH . '/' . CMDEALS_TEMPLATE_URL . 'single-daily-deals-reviews.php' ))
+		return STYLESHEETPATH . '/' . CMDEALS_TEMPLATE_URL . 'single-daily-deals-reviews.php'; 
 	else
 		return $cmdeals->plugin_path() . '/deals-templates/single-daily-deals-reviews.php';
 }
@@ -106,7 +106,7 @@ add_filter('comments_template', 'cmdeals_comments_template' );
  */
 function cmdeals_get_template($template_name, $require_once = true) {
 	global $cmdeals;
-	if (file_exists( STYLESHEETPATH . '/' . WPDEALS_TEMPLATE_URL . $template_name )) load_template( STYLESHEETPATH . '/' . WPDEALS_TEMPLATE_URL . $template_name, $require_once ); 
+	if (file_exists( STYLESHEETPATH . '/' . CMDEALS_TEMPLATE_URL . $template_name )) load_template( STYLESHEETPATH . '/' . CMDEALS_TEMPLATE_URL . $template_name, $require_once ); 
 	elseif (file_exists( STYLESHEETPATH . '/' . $template_name )) load_template( STYLESHEETPATH . '/' . $template_name , $require_once); 
 	else load_template( $cmdeals->plugin_path() . '/cmdeals-templates/' . $template_name , $require_once);
 }
