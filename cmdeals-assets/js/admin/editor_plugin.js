@@ -1,7 +1,7 @@
 (
 	function(){
 	
-		var icon_url = '../wp-content/plugins/wp-deals/cmdeals-assets/images/icons/wd_icon.png';
+		var icon_url = '../wp-content/plugins/cm-deals/cmdeals-assets/images/icons/wd_icon.png';
 	
 		tinymce.create(
 			"tinymce.plugins.CMDealsShortcodes",
