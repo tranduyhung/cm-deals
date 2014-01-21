@@ -29,22 +29,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  **/
 if (!function_exists('cmdeals_output_content_wrapper')) {
 	function cmdeals_output_content_wrapper() {
-		if ( get_option('template') === 'twentyeleven' ) :
-			echo '<div id="primary"><div id="content" role="main">';
-		elseif ( get_option('template') === 'twentytwelve' ) :
+		if ( get_option('template') === 'twentytwelve' ) :
 			echo '<div id="primary" class="site-content"><div id="content" role="main">';
 		else :
-			echo '<div id="container"><div id="content" role="main">';
+			echo '<div id="primary" class="content-area"><div id="content" class="site-content" role="main">';
 		endif;
 	}
 }
 if (!function_exists('cmdeals_output_content_wrapper_end')) {
 	function cmdeals_output_content_wrapper_end() {
-		if ( get_option('template') === 'twentyeleven' ) :
-			echo  '</div></div>';
-		else :
-			echo '</div></div>';
-		endif;
+		echo '</div></div>';
 	}
 }
 
