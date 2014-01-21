@@ -187,8 +187,10 @@ class cmdeals_order {
 			$return .= $item['qty'] . ' x ' . apply_filters('cmdeals_order_deals_title', $item['name'], $_deals);
 						
 			$return .= ' - ' . strip_tags(cmdeals_price( $item['cost']*$item['qty'], array('ex_tax_label' => 1 )));
-			
-			$item_meta = new order_item_meta( $item['item_meta'] );					
+
+			// CMExtension-TODO: Figure out what "item meta" is.
+			//$item_meta = new order_item_meta( $item['item_meta'] );
+			$item_meta = new order_item_meta();
 			$return .= PHP_EOL . $item_meta->display( true, true );
 			
 			if ($show_download_links) :

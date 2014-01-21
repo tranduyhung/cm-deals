@@ -200,7 +200,9 @@ class cmdeals_paypal extends cmdeals_payment_gateway {
 
                                 $item_name = $item['name'];
 
-                                $item_meta = new order_item_meta( $item['item_meta'] );					
+                                // CMExtension-TODO: Figure out what "item meta" is.
+                                //$item_meta = new order_item_meta( $item['item_meta'] );
+                                $item_meta = new order_item_meta();
                                 if ($meta = $item_meta->display( true, true )) :
                                         $item_name .= ' ('.$meta.')';
                                 endif;
