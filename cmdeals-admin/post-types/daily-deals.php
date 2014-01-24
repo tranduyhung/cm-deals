@@ -30,14 +30,14 @@ add_filter( 'manage_edit-daily-deals_columns', 'cmdeals_edit_deals_columns' );
 function cmdeals_edit_deals_columns( $columns ) {
 	$columns = array(
 		'cb'				=> '<input type="checkbox" />',
-		'thumb'				=> __('Image', 'cmdeals'),
-		'title'				=> __('Name', 'cmdeals'),
-		'deal-type'			=> __('Type', 'cmdeals'),
-		'deal-categories'	=> __('Categories', 'cmdeals'),
-		'price'				=> __('Price', 'cmdeals'),
-		'featured'			=> __('Featured', 'cmdeals'),
-		'status'			=> __('Status', 'cmdeals'),
-		'date'				=> __('Date', 'cmdeals'),
+		'thumb'				=> __( 'Image', 'cmdeals' ),
+		'title'				=> __( 'Name', 'cmdeals' ),
+		'deal-type'			=> __( 'Type', 'cmdeals' ),
+		'deal-categories'	=> __( 'Categories', 'cmdeals' ),
+		'price'				=> __( 'Price', 'cmdeals' ),
+		'featured'			=> __( 'Featured', 'cmdeals' ),
+		'status'			=> __( 'Status', 'cmdeals' ),
+		'date'				=> __( 'Date', 'cmdeals' ),
 	);
 
 	return $columns;
